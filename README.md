@@ -1,6 +1,6 @@
-# Agentarium Library for Agent-Based Modelling in Java
+# Modelarium Library for Agent-Based Modelling in Java
 
-**Agentarium** is a modular, extensible, and multithreaded agent-based modelling (ABM) framework for Java. It provides a flexible architecture for defining agents, environments, and behaviours using composable attributes, and supports high-performance simulation with optional cross-thread coordination.
+**Modelarium** is a modular, extensible, and multithreaded agent-based modelling (ABM) framework for Java. It provides a flexible architecture for defining agents, environments, and behaviours using composable attributes, and supports high-performance simulation with optional cross-thread coordination.
 
 ## Highlights
 
@@ -19,7 +19,7 @@
 
 ## Repo
 
-GitHub: https://github.com/JoshMcDonagh/Agentarium-ABM-Java
+GitHub: https://github.com/JoshMcDonagh/Modelarium
 
 ## Install / Build
 
@@ -46,7 +46,7 @@ Then depend on it from another project:
 ```xml
 <dependency>
   <groupId>com.github.joshmcdonagh</groupId>
-  <artifactId>agentarium-abm-java</artifactId>
+  <artifactId>modelarium</artifactId>
   <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
