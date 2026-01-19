@@ -1,6 +1,6 @@
 package integration.agentEnvironmentSyncIntegrationTest.attributes.environment.properties;
 
-import agentarium.attributes.Property;
+import modelarium.attributes.Property;
 
 public class EnvTick extends Property<Integer> {
     public EnvTick() { super("EnvTick", true, Integer.TYPE); }

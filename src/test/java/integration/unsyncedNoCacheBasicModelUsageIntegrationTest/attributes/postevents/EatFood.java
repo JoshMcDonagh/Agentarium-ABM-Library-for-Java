@@ -1,7 +1,7 @@
 package integration.unsyncedNoCacheBasicModelUsageIntegrationTest.attributes.postevents;
 
-import agentarium.attributes.Event;
-import agentarium.attributes.Property;
+import modelarium.attributes.Event;
+import modelarium.attributes.Property;
 
 public class EatFood extends Event {
 

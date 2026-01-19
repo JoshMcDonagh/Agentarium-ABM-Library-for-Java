@@ -1,11 +1,11 @@
 package integration.warmUpSemanticsIntegrationTest;
 
-import agentarium.Model;
-import agentarium.ModelSettings;
-import agentarium.agents.DefaultAgentGenerator;
-import agentarium.environments.DefaultEnvironmentGenerator;
-import agentarium.results.Results;
-import agentarium.scheduler.InOrderScheduler;
+import modelarium.Model;
+import modelarium.ModelSettings;
+import modelarium.agents.DefaultAgentGenerator;
+import modelarium.environments.DefaultEnvironmentGenerator;
+import modelarium.results.Results;
+import modelarium.scheduler.InOrderScheduler;
 import integration.agentEnvironmentSyncIntegrationTest.attributes.ModelAttributes;
 import integration.agentEnvironmentSyncIntegrationTest.results.ModelResults;
 import org.junit.jupiter.api.Test;

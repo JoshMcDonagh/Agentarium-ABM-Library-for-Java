@@ -1,6 +1,6 @@
 package integration.syncedCachedBasicModelUsageIntegrationTest.results;
 
-import agentarium.results.Results;
+import modelarium.results.Results;
 
 import java.util.ArrayList;
 import java.util.List;

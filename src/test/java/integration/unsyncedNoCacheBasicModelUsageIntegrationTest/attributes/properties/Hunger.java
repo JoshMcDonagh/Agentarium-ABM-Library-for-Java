@@ -1,6 +1,6 @@
 package integration.unsyncedNoCacheBasicModelUsageIntegrationTest.attributes.properties;
 
-import agentarium.attributes.Property;
+import modelarium.attributes.Property;
 
 public class Hunger extends Property<Double> {
 

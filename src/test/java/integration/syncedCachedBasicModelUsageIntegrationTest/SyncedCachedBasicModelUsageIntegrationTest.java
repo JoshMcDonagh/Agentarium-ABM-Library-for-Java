@@ -1,12 +1,12 @@
 package integration.syncedCachedBasicModelUsageIntegrationTest;
 
-import agentarium.Model;
-import agentarium.ModelSettings;
-import agentarium.agents.DefaultAgentGenerator;
-import agentarium.attributes.results.databases.AttributeSetResultsDatabaseFactory;
-import agentarium.environments.DefaultEnvironmentGenerator;
-import agentarium.results.Results;
-import agentarium.scheduler.RandomOrderScheduler;
+import modelarium.Model;
+import modelarium.ModelSettings;
+import modelarium.agents.DefaultAgentGenerator;
+import modelarium.attributes.results.databases.AttributeSetResultsDatabaseFactory;
+import modelarium.environments.DefaultEnvironmentGenerator;
+import modelarium.results.Results;
+import modelarium.scheduler.RandomOrderScheduler;
 import integration.syncedCachedBasicModelUsageIntegrationTest.attributes.ModelAttributes;
 import integration.syncedCachedBasicModelUsageIntegrationTest.results.ModelResults;
 import org.junit.jupiter.api.BeforeEach;
