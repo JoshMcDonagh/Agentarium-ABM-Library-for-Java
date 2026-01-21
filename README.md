@@ -2,6 +2,10 @@
 
 **Modelarium** is a modular, extensible, and multithreaded agent-based modelling (ABM) framework for Java. It provides a flexible architecture for defining agents, environments, and behaviours using composable attributes, and supports high-performance simulation with optional cross-thread coordination.
 
+## Documentation
+
+**API (Javadoc):** https://joshmcdonagh.github.io/Modelarium/apidocs/
+
 ## Highlights
 
 - Attribute-based modelling of agents and environments  
@@ -47,7 +51,7 @@ Then depend on it from another project:
 <dependency>
   <groupId>dev.modelarium</groupId>
   <artifactId>modelarium</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
