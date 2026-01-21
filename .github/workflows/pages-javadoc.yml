@@ -1,0 +1,55 @@
+name: Publish Javadocs
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Generate Javadocs
+        run: mvn -B -DskipTests javadoc:javadoc
+
+      - name: Prepare Pages content
+        run: |
+          rm -rf site
+          mkdir -p site
+
+          if [ -f "target/site/apidocs/index.html" ]; then
+            cp -R target/site/apidocs/* site/
+          elif [ -f "target/site/apidocs/apidocs/index.html" ]; then
+            cp -R target/site/apidocs/apidocs/* site/
+          else
+            echo "Could not find Javadocs index.html"
+            find target -maxdepth 5 -type f -name index.html -print
+            exit 1
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
