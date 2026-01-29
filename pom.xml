@@ -2,7 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.modelarium</groupId>
+    <artifactId>modelarium</artifactId>
+    <version>1.1.1</version>
+    <packaging>jar</packaging>
+
     <name>Modelarium</name>
     <description>Modular, extensible, multithreaded agent-based modelling (ABM) framework for Java.</description>
     <url>https://modelarium.dev</url>
@@ -30,12 +37,6 @@
         <tag>v1.1.1</tag>
     </scm>
 
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>dev.modelarium</groupId>
-    <artifactId>modelarium</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
@@ -49,9 +50,12 @@
 
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
-        <maven.shade.plugin.version>3.6.0</maven.shade.plugin.version>
         <maven.enforcer.plugin.version>3.5.0</maven.enforcer.plugin.version>
         <maven.javadoc.plugin.version>3.11.2</maven.javadoc.plugin.version>
+        <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
+
+        <maven.gpg.plugin.version>3.2.7</maven.gpg.plugin.version>
+        <central.publishing.plugin.version>0.6.0</central.publishing.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -149,35 +153,29 @@
                 <version>${maven.javadoc.plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>generate-javadocs</id>
+                        <id>generate-javadocs-html</id>
                         <phase>package</phase>
                         <goals>
                             <goal>javadoc</goal>
                         </goals>
                         <configuration>
                             <release>${maven.compiler.release}</release>
-                            <outputDirectory>${project.build.directory}/site</outputDirectory>
                             <doclint>none</doclint>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <charset>${project.build.sourceEncoding}</charset>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
                         </configuration>
                     </execution>
-                </executions>
-            </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven.shade.plugin.version}</version>
-                <executions>
                     <execution>
-                        <phase>package</phase>
+                        <id>attach-javadocs</id>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <release>${maven.compiler.release}</release>
+                            <doclint>none</doclint>
+                            <encoding>${project.build.sourceEncoding}</encoding>
                         </configuration>
                     </execution>
                 </executions>
@@ -186,27 +184,64 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${maven.source.plugin.version}</version>
                 <executions>
                     <execution>
-                    <id>attach-sources</id>
-                    <goals><goal>jar-no-fork</goal></goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.8.0</version>
-                <executions>
-                    <execution>
-                    <id>attach-javadocs</id>
-                    <goals><goal>jar</goal></goals>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.7</version>
+
+                        <executions>
+                            <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <passphraseEnvName>MAVEN_GPG_PASSPHRASE</passphraseEnvName>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                                <arg>--batch</arg>
+                                <arg>--yes</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central.publishing.plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <tokenAuth>true</tokenAuth>
+                            <autoPublish>true</autoPublish>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

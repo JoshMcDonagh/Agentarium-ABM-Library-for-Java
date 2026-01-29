@@ -47,7 +47,7 @@ Then depend on it from another project:
 <dependency>
   <groupId>dev.modelarium</groupId>
   <artifactId>modelarium</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
 </dependency>
 ```
 
