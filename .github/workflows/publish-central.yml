@@ -1,6 +1,9 @@
 name: Publish to Maven Central (Central Portal)
 
 on:
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
 
 permissions:
